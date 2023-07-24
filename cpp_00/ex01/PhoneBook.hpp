@@ -3,12 +3,10 @@
 
 	#include <iostream>
 	#include <cstring>
+	#include <iomanip>
+	#include <stdlib.h>
 
-	using std::strcmp;
-	using std::cout;
 	using std::string;
-	using std::endl;
-	using std::cin;
 
 	class Contact
 	{
@@ -33,7 +31,8 @@
 		public:
 			PhoneBook();
 			void add_contact(int index, string first, string last, string nick, string phone, string secret);
-			void print_all(int *total_added);
+			void print_table(int *total_added);
+			void print_info(int index);
 		private:
 			Contact contacts[8];
 	};

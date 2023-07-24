@@ -1,5 +1,18 @@
 #include "PhoneBook.hpp"
 
+using std::setw;
+using std::strcmp;
+using std::cout;
+using std::endl;
+using std::cin;
+
+string trunc(string str)
+{
+	if (str.length() > 10)
+		return (str.substr(1, 10).replace(9, 10, "."));
+	return (str);
+}
+
 string Contact::get_first()
 {
 	return (this->first_name);
@@ -38,12 +51,29 @@ void Contact::set_contacts(string first, string last, string nick, string phone,
 	this->secret = secret;
 }
 
-void PhoneBook::print_all(int *total_added)
+void PhoneBook::print_info(int index)
 {
-	for (int i = 0; i < 8 && i < *total_added + 1; i++)
+	cout << "First Name: " << this->contacts[index].get_first() << endl;
+	cout << "Last Name: " << this->contacts[index].get_last() << endl;
+	cout << "Nickname: " << this->contacts[index].get_nick() << endl;
+	cout << "Phone Number: " << this->contacts[index].get_phone() << endl;
+	cout << "DARKEST secret: " << this->contacts[index].get_secret() << endl;
+}
+
+void PhoneBook::print_table(int *total_added)
+{
+	cout << *total_added << endl;
+	cout << "_____________________________________________" << endl;
+	cout << "|     Index|First Name| Last Name|  Nickname|" << endl;
+	for (int i = 0; i < 8 && i < *total_added; i++)
 	{
-		cout << this->contacts[i].get_phone() << endl;
+		cout << "|"  << setw(10) << i;
+		cout << "|"  << setw(10) << trunc(this->contacts[i].get_first());
+		cout << "|"  << setw(10) << trunc(this->contacts[i].get_last());
+		cout << "|"  << setw(10) << trunc(this->contacts[i].get_nick());
+		cout << "|" << endl;
 	}
+	cout << "_____________________________________________" << endl;
 }
 
 PhoneBook::PhoneBook()
@@ -71,15 +101,31 @@ void add_funct(PhoneBook &ref, int *total_added)
 	cin >> nickname;
 	cout << "insert phone number:" << endl;
 	cin >> phone_num;
-	cout << "insert PERSONAL secret:" << endl;
+	cout << "insert DARKEST secret:" << endl;
 	cin >> secret;
 
-	ref.add_contact(*total_added++, first_name, last_name, nickname, phone_num, secret);
+	ref.add_contact((*total_added)++, first_name, last_name, nickname, phone_num, secret);
+}
+
+bool num_check(string str)
+{
+	return (str.find_first_not_of("0123456789") == std::string::npos);
 }
 
 void search_funct(PhoneBook &ref, int *total_added)
 {
-	ref.print_all(total_added);
+	string input;
+
+	ref.print_table(total_added);
+	cout << "input index:" << endl;
+	cin >> input;
+	int num = std::strtod(input.c_str(), NULL);
+	if (num_check(input) == false || num > 7 || num >= *total_added - 1)
+	{
+		cout << "invalid index" << endl;
+		return;
+	}
+	ref.print_info(num);
 }
 
 int main(void)
