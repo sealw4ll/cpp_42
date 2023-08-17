@@ -62,7 +62,6 @@ void PhoneBook::print_info(int index)
 
 void PhoneBook::print_table(int *total_added)
 {
-	cout << *total_added << endl;
 	cout << "_____________________________________________" << endl;
 	cout << "|     Index|First Name| Last Name|  Nickname|" << endl;
 	for (int i = 0; i < 8 && i < *total_added; i++)
@@ -85,7 +84,7 @@ void PhoneBook::add_contact(int index, string first, string last, string nick, s
 	this->contacts[index % 8].set_contacts(first, last, nick, phone, secret);
 }
 
-void add_funct(PhoneBook &ref, int *total_added)
+void add_funct(PhoneBook phonebook, int *total_added)
 {
 	string first_name;
 	string last_name;
@@ -104,7 +103,7 @@ void add_funct(PhoneBook &ref, int *total_added)
 	cout << "insert DARKEST secret:" << endl;
 	cin >> secret;
 
-	ref.add_contact((*total_added)++, first_name, last_name, nickname, phone_num, secret);
+	phonebook.add_contact((*total_added)++, first_name, last_name, nickname, phone_num, secret);
 }
 
 bool num_check(string str)
@@ -112,20 +111,20 @@ bool num_check(string str)
 	return (str.find_first_not_of("0123456789") == std::string::npos);
 }
 
-void search_funct(PhoneBook &ref, int *total_added)
+void search_funct(PhoneBook phonebook, int *total_added)
 {
 	string input;
 
-	ref.print_table(total_added);
+	phonebook.print_table(total_added);
 	cout << "input index:" << endl;
 	cin >> input;
 	int num = std::strtod(input.c_str(), NULL);
-	if (num_check(input) == false || num > 7 || num >= *total_added - 1)
+	if (num_check(input) == false || num > 7 || num >= *total_added || *total_added < 1)
 	{
 		cout << "invalid index" << endl;
 		return;
 	}
-	ref.print_info(num);
+	phonebook.print_info(num);
 }
 
 int main(void)
@@ -133,16 +132,15 @@ int main(void)
 	int total_added = 0;
 	string input;
 	PhoneBook phonebook;
-	PhoneBook &ref = phonebook;
 
 	while (1)
 	{
 		cout << "Please insert valid input" << endl;
 		cin >> input;
 		if (!strcmp("ADD", input.c_str()))
-			add_funct(ref, &total_added);
+			add_funct(phonebook, &total_added);
 		else if (!strcmp("SEARCH", input.c_str()))
-			search_funct(ref, &total_added);
+			search_funct(phonebook, &total_added);
 		else if (!strcmp("EXIT", input.c_str()))
 			return 0;
 		else
