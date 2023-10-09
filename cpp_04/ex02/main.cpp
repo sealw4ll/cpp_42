@@ -4,6 +4,7 @@
 
 int main()
 {
-	// const Animal animal;
+	//if failed to compile it means it is an abstract class
+	Animal* e = new Animal();
 	return 0;
 }

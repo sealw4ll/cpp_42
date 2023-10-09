@@ -15,7 +15,7 @@ class Animal
 		virtual ~Animal();
 		Animal(Animal &copy);
 		Animal &operator = (const Animal &copy);
-		virtual void makeSound() const;
+		virtual void makeSound() const = 0;
 		string getType() const;
 	protected:
 		Animal();
