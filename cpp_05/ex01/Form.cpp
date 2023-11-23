@@ -60,9 +60,9 @@ bool Form::getifsign()
 	return this->ifsign;
 }
 
-void Form::besigned(Bureaucrat &guy)
+void Form::besigned(int grade)
 {
-	if (guy->grade >= this->reqsign)
+	if (grade >= this->reqsign)
 		throw Form::GradeTooLowException;
 	this->ifsign = true;
 }

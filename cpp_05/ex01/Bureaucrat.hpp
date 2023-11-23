@@ -1,7 +1,6 @@
 # ifndef BUREAUCRAT_HPP
 # define BUREAUCRAT_HPP
 
-#include "Form.hpp"
 #include <string>
 #include <iostream>
 #include <stdlib.h>
@@ -11,23 +10,7 @@ using std::string;
 using std::cout;
 using std::endl;
 
-class GradeTooHigh : public std::exception
-{
-	public:
-		const char *what() const throw()
-		{
-			return ("Grade too high");
-		}
-};
-
-class GradeTooLow : public std::exception
-{
-	public:
-		const char *what() const throw()
-		{
-			return ("Grade too low");
-		}
-};
+class Form;
 
 class Bureaucrat
 {
@@ -46,10 +29,28 @@ class Bureaucrat
 	private:
 		string name;
 		int grade;
-		GradeTooHigh GradeTooHighException;
-		GradeTooLow GradeTooLowException;
+
+		class GradeTooHighException : public std::exception
+		{
+			public:
+				const char *what() const throw()
+				{
+					return ("Grade too high");
+				}
+		};
+
+		class GradeTooLowException : public std::exception
+		{
+			public:
+				const char *what() const throw()
+				{
+					return ("Grade too low");
+				}
+		};
 };
 
 std::ostream & operator << (std::ostream &out, const Bureaucrat &obj);
+
+#include "Form.hpp"
 
 #endif

@@ -1,7 +1,6 @@
 # ifndef FORM_HPP
 # define FORM_HPP
 
-#include "Bureaucrat.hpp"
 #include <string>
 #include <iostream>
 #include <stdlib.h>
@@ -23,15 +22,31 @@ class Form
 		int getreqsign();
 		int getreqexec();
 		int getifsign();
-		void besigned(Bureaucrat &guy);
+		void besigned(int grade);
 		void signform();
 	private:
 		const string name;
 		bool ifsign;
 		const int reqsign;
 		const int reqexec;
-		GradeTooHigh GradeTooHighException;
-		GradeTooLow GradeTooLowException;
+
+		class GradeTooHighException : public std::exception
+		{
+			public:
+				const char *what() const throw()
+				{
+					return ("Grade too high");
+				}
+		};
+
+		class GradeTooLowException : public std::exception
+		{
+			public:
+				const char *what() const throw()
+				{
+					return ("Grade too low");
+				}
+		};
 };
 
 std::ostream & operator << (std::ostream &out, const Form &obj)
