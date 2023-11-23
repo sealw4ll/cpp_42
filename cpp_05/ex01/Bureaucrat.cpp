@@ -11,9 +11,9 @@ Bureaucrat::Bureaucrat(string name, int grade) : name(name)
 {
 	cout << "Bureaucrat constructor called" << endl;
 	if (grade < 1)
-		throw (Bureaucrat::GradeTooHighException);
+		throw (Bureaucrat::GradeTooHighException());
 	if (grade > 150)
-		throw (Bureaucrat::GradeTooLowException);
+		throw (Bureaucrat::GradeTooLowException());
 	this->grade = grade;
 }
 
@@ -42,7 +42,7 @@ void Bureaucrat::increment()
 	if (grade < 1)
 	{
 		delete this;
-		throw (Bureaucrat::GradeTooHighException);
+		throw (Bureaucrat::GradeTooHighException());
 	}
 }
 
@@ -52,7 +52,7 @@ void Bureaucrat::decrement()
 	if (grade > 150)
 	{
 		delete this;
-		throw (Bureaucrat::GradeTooLowException);
+		throw (Bureaucrat::GradeTooLowException());
 	}
 }
 
@@ -75,11 +75,11 @@ void Bureaucrat::signform(Form &form)
 {
 	try
 	{
-		form.besigned((*this));
+		form.besigned(this->grade);
+		cout << name << " successfully signed " << form.getname() << endl;
 	}
 	catch (std::exception &e)
 	{
 		cout << this->name << " couldn't sign " << form.getname() << " because " << e.what() << endl;
 	}
-	cout << name << "successfully signed" << form.getName() << endl;
 }

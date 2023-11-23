@@ -10,7 +10,8 @@ using std::string;
 using std::cout;
 using std::endl;
 
-class Form;
+// class Form;
+#include "Form.hpp"
 
 class Bureaucrat
 {
@@ -51,6 +52,5 @@ class Bureaucrat
 
 std::ostream & operator << (std::ostream &out, const Bureaucrat &obj);
 
-#include "Form.hpp"
 
 #endif

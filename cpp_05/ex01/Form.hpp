@@ -18,10 +18,10 @@ class Form
 		Form(const Form &Form);
 		Form & operator = (const Form &Form);
 		~Form();
-		string getname();
-		int getreqsign();
-		int getreqexec();
-		int getifsign();
+		string getname() const;
+		int getreqsign() const;
+		int getreqexec() const;
+		bool getifsign() const;
 		void besigned(int grade);
 		void signform();
 	private:
@@ -49,6 +49,6 @@ class Form
 		};
 };
 
-std::ostream & operator << (std::ostream &out, const Form &obj)
+std::ostream & operator << (std::ostream &out, const Form &obj);
 
 #endif

@@ -1,27 +1,21 @@
 #include "Form.hpp"
 
-Form::Form()
+Form::Form() : name("default") , reqsign(75) , reqexec(75)
 {
 	cout << "Default constructor called" << endl;
-	this->name = "default";
 	this->ifsign = false;
-	this->reqsign = 75;
-	this->reqexec = 75;
 }
 
-Form::Form(const Form &form)
+Form::Form(const Form &form) : name(form.name) , reqsign(form.reqsign) , reqexec(form.reqexec)
 {
 	cout << "Form copy constructor called" << endl;
-	*this = Form;
+	*this = form;
 }
 
-Form & Form::operator = (const Form &form)
+Form & Form::operator = (Form const &form)
 {
 	cout << "Form copy assignment called" << endl;
-	this->name = form.getname();
-	this->reqsign = form.getreqsign();
-	this->reqexec = form.getreqexec();
-	this->ifsign = form.getifsign();
+	(void)form;
 	return *this;
 }
 
@@ -32,30 +26,30 @@ Form::~Form()
 
 Form::Form(string name, int reqsign, int reqexec) : name(name) , reqsign(reqsign) , reqexec(reqexec)
 {
-	cout << "Overloaded constructor called" << endl;
-	this->ifsign = false
+	cout << "Form overloaded constructor called" << endl;
+	this->ifsign = false;
 	if (reqsign > 150 || reqexec > 150)
-		throw Form::GradeTooLowException;
+		throw (Form::GradeTooLowException());
 	if (reqsign < 1 || reqexec < 1)
-		throw Form::GradeTooHighException;
+		throw (Form::GradeTooHighException());
 }
 
-string Form::getname()
+string Form::getname() const
 {
 	return this->name;
 }
 
-int Form::getreqsign()
+int Form::getreqsign() const
 {
 	return this->reqsign;
 }
 
-int Form::getreqexec()
-{
+int Form::getreqexec() const
+{ 
 	return this->reqexec;
 }
 
-bool Form::getifsign()
+bool Form::getifsign() const
 {
 	return this->ifsign;
 }
@@ -63,11 +57,11 @@ bool Form::getifsign()
 void Form::besigned(int grade)
 {
 	if (grade >= this->reqsign)
-		throw Form::GradeTooLowException;
+		throw (Form::GradeTooLowException());
 	this->ifsign = true;
 }
 
-std::ostream & operator << (std::ostream &out, const Bureaucrat &obj)
+std::ostream & operator << (std::ostream &out, const Form &obj)
 {
   return out << obj.getname() << ", form is signed? " << obj.getifsign() << " Form requirement "<< obj.getreqsign() << ".";
 }
