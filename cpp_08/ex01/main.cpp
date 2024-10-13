@@ -15,6 +15,17 @@ int main()
 
 	sp.addMulti(vec);
 
-	std::cout << sp.shortestSpan() << std::endl;
-	std::cout << sp.longestSpan() << std::endl;
+	cout << "6 value shortest span: "<< sp.shortestSpan() << endl;
+	cout << "6 balue longest span: "<< sp.longestSpan() << endl;
+
+    std::srand(static_cast<unsigned int>(time(0)));    // Create a vector to store the random values
+    Span span = Span(10000);
+    // Loop to add 10,000 random values
+    for (size_t i = 0; i < 10000; ++i) {
+        // Generate a random value between 0 and UINT_MAX
+        unsigned int randomValue = static_cast<unsigned int>(std::rand());
+        span.addNumber(randomValue);
+    }
+    cout << "10k value shortest span: "<< span.shortestSpan() << endl;
+	cout << "10k balue longest span: "<< span.longestSpan() << endl;
 }
