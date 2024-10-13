@@ -84,7 +84,7 @@ void PhoneBook::add_contact(int index, string first, string last, string nick, s
 	this->contacts[index % 8].set_contacts(first, last, nick, phone, secret);
 }
 
-void add_funct(PhoneBook phonebook, int *total_added)
+void add_funct(PhoneBook &phonebook, int *total_added)
 {
 	string first_name;
 	string last_name;
@@ -111,7 +111,7 @@ bool num_check(string str)
 	return (str.find_first_not_of("0123456789") == std::string::npos);
 }
 
-void search_funct(PhoneBook phonebook, int *total_added)
+void search_funct(PhoneBook &phonebook, int *total_added)
 {
 	string input;
 
