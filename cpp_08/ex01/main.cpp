@@ -18,6 +18,15 @@ int main()
 	cout << "6 value shortest span: "<< sp.shortestSpan() << endl;
 	cout << "6 balue longest span: "<< sp.longestSpan() << endl;
 
+    try
+    {
+        sp.addNumber(10); // should fail
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << endl;
+    }
+    
     std::srand(static_cast<unsigned int>(time(0)));    // Create a vector to store the random values
     Span span = Span(10000);
     // Loop to add 10,000 random values
