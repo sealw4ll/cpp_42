@@ -1,6 +1,6 @@
 all:
-	c++ *.cpp -Wall -Wextra -Werror -std=c++98 -o identify -fsanitize=address -g3
+	c++ *.cpp -Wall -Wextra -Werror -std=c++98 -o mutantstack -fsanitize=address -g3
 
 clean:
-	rm identify
-	rm -rf identify.dSYM
+	rm mutantstack
+	rm -rf mutantstack.dSYM
