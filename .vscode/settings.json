@@ -76,7 +76,9 @@
 		"random": "cpp",
 		"numbers": "cpp",
 		"array.hpp": "c",
-		"*.tpp": "cpp"
+		"*.tpp": "cpp",
+		"__tree": "cpp",
+		"map": "cpp"
 	},
 	"C_Cpp.errorSquiggles": "disabled"
 }
