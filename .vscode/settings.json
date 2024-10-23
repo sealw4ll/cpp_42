@@ -78,7 +78,8 @@
 		"array.hpp": "c",
 		"*.tpp": "cpp",
 		"__tree": "cpp",
-		"map": "cpp"
+		"map": "cpp",
+		"list": "cpp"
 	},
 	"C_Cpp.errorSquiggles": "disabled"
 }
